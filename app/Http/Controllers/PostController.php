@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
+use Session;
+use Image;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -21,9 +26,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createPost()
+    public function postCreate()
     {
-        //
+        return view('posts.addPost');
     }
 
     /**
@@ -32,9 +37,43 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storePost(Request $request)
+    public function postStore(Request $request)
     {
-        //
+        $this->validate($request, array(
+            'title' => 'required|min:10|max:100',
+            'content_main' => 'required|min:50',
+            'alias' => 'unique:Posts,alias',
+            'meta_desc' => 'max:260',
+            "meta_title" => 'min:10'
+        ));
+
+            $post = New Post;
+
+            $post->title = $request->title;
+            $post->content = $request->content_main;
+            $post->alias = $request->alias;
+
+
+    if($request->hasFile('meta_img')) {
+        $meta_img = $request->file('meta_img');
+        $filename = time() . '_' . $string = str_random(20) . '.' . $meta_img->getClientOriginalExtension();
+        $location = public_path('/tmp/meta_img/' . $filename);
+        Image::make($meta_img)->resize(550, 330)->save($location);
+
+        $post->meta_img = $filename;
+    }
+
+        if($request->hasFile('img')) {
+            $img = $request->file('img');
+            $filename = time() . '_'. $string = str_random(20) . '.' . $img->getClientOriginalExtension();
+            $location = public_path('/tmp/img/' . $filename);
+            Image::make($img)->save($location);
+
+            $post->img = $filename;
+        }
+
+            $post->save();
+
     }
 
     /**
@@ -43,12 +82,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function indexPost()
+    public function postIndex()
     {
 
     }
 
-    public function showPost($id)
+    public function postShow($id)
     {
         //
     }
@@ -59,7 +98,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editPost($id)
+    public function postEdit($id)
     {
         //
     }
@@ -71,7 +110,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updatePost(Request $request, $id)
+    public function postUpdate(Request $request, $id)
     {
         //
     }
@@ -82,7 +121,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyPost($id)
+    public function postDestroy($id)
     {
         //
     }

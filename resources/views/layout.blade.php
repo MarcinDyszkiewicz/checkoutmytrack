@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('header_css')
 
-    {{--<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">--}}
-    {{--<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">--}}
-    {{--<link rel="stylesheet" type="text/css" href="assets/css/animate.css">--}}
-    {{--<link rel="stylesheet" type="text/css" href="assets/css/slick.css">--}}
-    {{--<link rel="stylesheet" type="text/css" href="assets/css/theme.css">--}}
-    {{--<link rel="stylesheet" type="text/css" href="assets/css/style.css">--}}
 
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet"/>
@@ -54,7 +48,7 @@
                     </div>
                 </div>
                 <div class="header_bottom">
-                    <div class="header_bottom_left"><a class="logo" href="index.html">Check<strong>Out</strong> <span>A Pro Magazine Template</span></a></div>
+                    <div class="header_bottom_left"><a class="logo" href="index.html">Check<strong> Out My Track</strong> <span></span></a></div>
                 </div>
             </div>
         </div>
