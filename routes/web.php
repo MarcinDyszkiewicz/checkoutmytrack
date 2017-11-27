@@ -13,6 +13,8 @@
 
 Route::get('/', 'PostController@home')->name('home');
 
-Route::get('/addpost', 'PostController@postCreate')->name('addPost');
+Route::get('/postadd', 'PostController@postCreate')->name('postAdd');
 
-Route::post('/addpost/store', 'PostController@postStore');
+Route::post('/postadd/store', 'PostController@postStore');
+
+Route::get('/post/{id}', 'PostController@postShow')->name('postShow');

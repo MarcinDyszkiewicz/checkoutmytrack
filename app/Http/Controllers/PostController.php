@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function postCreate()
     {
-        return view('posts.addPost');
+        return view('posts.postAdd');
     }
 
     /**
@@ -74,6 +74,7 @@ class PostController extends Controller
 
             $post->save();
 
+    return redirect('postShow');
     }
 
     /**
@@ -84,12 +85,16 @@ class PostController extends Controller
      */
     public function postIndex()
     {
+        $post = Post::all();
 
+        return view('postIndex.home', ['post'=>$post]);
     }
 
     public function postShow($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('posts.showPost', ['post'=>$post]);
     }
 
     /**
@@ -100,7 +105,9 @@ class PostController extends Controller
      */
     public function postEdit($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('posts.editPost', ['post'=>$post]);
     }
 
     /**
